@@ -16,6 +16,13 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+a:hover {
+  color: #c4c4c4;
+}
 body {
   background-color: #0d1418;
   color: #ffffff;

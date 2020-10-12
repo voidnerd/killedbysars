@@ -2,7 +2,7 @@
   <header
     class="d-flex flex-row mt-5 w-100 align-items-end justify-content-between"
   >
-    <div class="logo-container d-flex">
+    <nuxt-link to="/" class="logo-container d-flex">
       <div class="align-self-center pb-2 mr-3">
         <svg
           width="31"
@@ -18,7 +18,7 @@
         </svg>
       </div>
       <div class="title">Killed By SARS</div>
-    </div>
+    </nuxt-link>
     <ul class="d-flex flex-row justify-content-between navigation">
       <li class="">
         <a class="" aria-current="page" href="#">All</a>

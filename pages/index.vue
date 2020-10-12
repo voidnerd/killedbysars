@@ -1,23 +1,25 @@
 <template>
   <div class="container">
     <Header />
-    <div class="d-flex adder flex-row align-items-center mt-5">
-      <div class="adder__icon p-3 mr-3 rounded-circle">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 37 39"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M24.3577 13.9811H37V24.6141H24.3577V39H12.6794V24.6141H0V13.9811H12.6794V0H24.3577V13.9811Z"
-            fill="#0D1418"
-          />
-        </svg>
+    <nuxt-link to="/publish">
+      <div class="d-flex adder flex-row align-items-center mt-5">
+        <div class="adder__icon p-3 mr-3 rounded-circle">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 37 39"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M24.3577 13.9811H37V24.6141H24.3577V39H12.6794V24.6141H0V13.9811H12.6794V0H24.3577V13.9811Z"
+              fill="#0D1418"
+            />
+          </svg>
+        </div>
+        <div class="adder__text">Add a Fallen</div>
       </div>
-      <div class="adder__text">Add a Fallen</div>
-    </div>
+    </nuxt-link>
 
     <div class="cards mt-5">
       <div class="w-25 rounded card pb-3">
@@ -33,7 +35,7 @@
           aliquip ex ea commodo consequat.
         </p>
 
-        <div class="my-4 mx-auto reader">
+        <nuxt-link to="/victim/9998" class="my-4 mx-auto reader">
           <span class="read__text"> Read More </span>
           <span>
             <svg
@@ -49,7 +51,7 @@
               />
             </svg>
           </span>
-        </div>
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -63,6 +65,7 @@ export default {}
 .container {
   font-family: 'Roboto', sans-serif;
 }
+
 .adder {
   width: 200px;
 }
