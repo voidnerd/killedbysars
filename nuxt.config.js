@@ -10,21 +10,26 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
-        rel:"stylesheet", href:"https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css", integrity:"sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK", crossorigin:"anonymous"
+        rel: 'stylesheet',
+        href:
+          'https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css',
+        integrity:
+          'sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK',
+        crossorigin: 'anonymous',
       },
       {
-        href:"https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap", rel:"stylesheet"
-      }
+        href:
+          'https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap',
+        rel: 'stylesheet',
+      },
     ],
-
-
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: ['~/plugins/filter'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -44,7 +49,9 @@ export default {
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: process.env.BASE_URL || 'https://api.killedbysars.com',
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},

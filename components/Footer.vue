@@ -26,11 +26,19 @@
     <p class="footer__text mx-auto mt-4">
       Contributors are Relatives, Friends and Fellow Citizens paying respect to
       those who gave their lives so we can say enough is enough #EndSars. You
-      can contribute to this codebase website on github, follow us on twitter.
+      can contribute to this codebase on
+      <a href="https://github.com/ndiecodes/killedbysars" target="_blank"
+        >github </a
+      >, follow us on
+      <a href="https://twitter.com/killedbysars" target="_blank">twitter </a>.
     </p>
     <p class="footer__copyright mx-auto">
-      © 2020 Killed by SARS. - This site is Created by @ndiecodes. Designed by
-      @art_of_osil
+      Created by
+      <a href="https://twitter.com/ndiecodes" target="_blank"> @ndiecodes </a>.
+      Designed by
+      <a href="https://twitter.com/art_of_osil" target="_blank">
+        @art_of_osil
+      </a>
     </p>
   </footer>
 </template>
@@ -49,7 +57,7 @@
 
 .footer__text {
   text-align: center;
-  width: 40%;
+  width: 50%;
 }
 
 .footer__copyright {
@@ -58,7 +66,7 @@
 }
 
 .logo-container {
-  width: 25%;
+  width: 300px;
 }
 
 .title {
@@ -66,5 +74,21 @@
   font-weight: 300;
   font-size: 40px;
   line-height: 53px;
+}
+
+@media screen and (max-width: 767px) {
+  .logo-container {
+    width: 200px;
+  }
+  .title {
+    font-size: 25px;
+    line-height: 53px;
+  }
+  .footer__text {
+    width: 90%;
+  }
+  .footer__copyright {
+    width: 90%;
+  }
 }
 </style>

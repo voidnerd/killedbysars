@@ -16,5 +16,9 @@ module.exports = {
   ],
   // plugins: ['prettier'],
   // add your custom rules here
-  rules: {},
+  rules: {
+    'comma-dangle': [2, 'always-multiline'],
+    'space-before-function-paren': ['error', 'never'],
+    'vue/max-attributes-per-line': 'off',
+  },
 }

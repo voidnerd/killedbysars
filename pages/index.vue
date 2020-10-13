@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Header />
-    <nuxt-link to="/publish">
+    <Header v-on:Gender="Gender" v-on:search="search" />
+    <nuxt-link to="/publish" class="d-block mx-auto mx-md-0 publish w-25">
       <div class="d-flex adder flex-row align-items-center mt-5">
         <div class="adder__icon p-3 mr-3 rounded-circle">
           <svg
@@ -21,21 +21,27 @@
       </div>
     </nuxt-link>
 
-    <div class="cards mt-5">
-      <div class="w-25 rounded card pb-3">
-        <img src="/victim.png" alt="" class="image" />
-        <h1 class="text-center mt-3">Isiaq Jimoh</h1>
+    <div
+      class="cards d-flex justify-content-center justify-content-md-between flex-wrap"
+    >
+      <div
+        v-for="victim in selected"
+        :key="victim.id"
+        class="rounded card pb-3 mt-5"
+      >
+        <img :src="victim.imageUrl" alt="" class="image" />
+        <h1 class="text-center mt-3">{{ victim.name }}</h1>
         <div class="text-center">
-          <span>1993 - 2020 | Lagos</span>
+          <span
+            >{{ victim.year_born }} - {{ victim.year_killed }} |
+            {{ victim.state | capitalize }}</span
+          >
         </div>
-        <p class="text-justify mt-3">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+        <p class="mt-3 story max-lines">
+          {{ victim.story }}
         </p>
 
-        <nuxt-link to="/victim/9998" class="my-4 mx-auto reader">
+        <nuxt-link :to="`/victim/${victim.id}`" class="my-4 mx-auto reader">
           <span class="read__text"> Read More </span>
           <span>
             <svg
@@ -58,7 +64,36 @@
 </template>
 
 <script>
-export default {}
+export default {
+  async asyncData({ $axios }) {
+    const response = await $axios.$get('/victims')
+    return { victims: response.data, selected: response.data }
+  },
+
+  data() {
+    return {
+      selected: [],
+      victims: [],
+    }
+  },
+  methods: {
+    Gender(gender) {
+      console.log(gender)
+      if (gender === 'both') {
+        this.selected = this.victims
+        return
+      }
+      this.selected = this.victims.filter((val) => {
+        return val.gender === gender
+      })
+    },
+    search(str) {
+      this.selected = this.victims.filter((val) => {
+        return val.name.includes(str)
+      })
+    },
+  },
+}
 </script>
 
 <style scoped>
@@ -66,9 +101,13 @@ export default {}
   font-family: 'Roboto', sans-serif;
 }
 
-.adder {
-  width: 200px;
+/* .publish {
+  width: 70px;
 }
+
+.adder {
+  width: 40%;
+} */
 .adder__icon {
   background-color: #fff;
   /* width: 200px; */
@@ -78,14 +117,28 @@ export default {}
 }
 .image {
   width: 100%;
+  height: 250px;
+}
+.story {
+  min-height: 100px;
 }
 .card {
   background-color: #262d31;
+  width: 340px;
 }
 p {
   font-size: 1.3rem;
   width: 93%;
   margin: 0 auto;
+}
+
+.max-lines {
+  display: block;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em;
+  line-height: 1.8em;
 }
 
 .read__text {
@@ -98,5 +151,11 @@ p {
 
 .reader:hover {
   border-bottom: 1px solid #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .publish {
+    width: 200px !important;
+  }
 }
 </style>

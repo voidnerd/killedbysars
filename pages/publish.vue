@@ -6,78 +6,108 @@
       <hr />
       <div class="form mx-auto">
         <div class="row mt-4">
-          <div class="col-sm-5">
+          <p v-show="error" class="text-center text-danger font-weight-bold">
+            {{ errorMessage }}
+          </p>
+          <div class="col-md-5 col-sm-12">
             <div class="d-flex flex-column align-items-center uploader mx-auto">
-              <img src="/placeholder.svg" alt="" class="image" />
+              <img
+                :src="currentFile"
+                @click="$refs.file.click()"
+                alt=""
+                class="image"
+              />
+              <input
+                type="file"
+                @change="onFileChange"
+                ref="file"
+                style="display: none"
+              />
               <span class="d-block text center">Please choose a picture</span>
             </div>
           </div>
-          <div class="col-sm-7">
-            <div class="pl-2 pr-2 mb-auto">
-              <div class="mb-3 input__holder">
-                <label>Full Name</label>
-                <input
-                  type="email"
-                  id="exampleFormControlInput1"
-                  placeholder="Isiaq Jimoh"
-                />
+          <div class="col-md-7 col-sm-12">
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div class="mb-3 input__holder">
+                  <label>Full Name</label>
+                  <input
+                    type="email"
+                    v-model="name"
+                    placeholder="Isiaq Jimoh"
+                  />
+                </div>
               </div>
             </div>
-            <div class="d-flex mt-5">
-              <div class="input__holder mr-3 w-50">
-                <label>State</label>
-                <input
-                  type="email"
-                  id="exampleFormControlInput1"
-                  placeholder="Lagos"
-                />
+            <div class="row mt-4">
+              <div class="col-md-6 col-sm-6 mt-4 mt-md-0">
+                <div class="input__holder 50">
+                  <label>State</label>
+                  <select v-model="state">
+                    <option v-for="state in states" :key="state">
+                      {{ state }}
+                    </option>
+                  </select>
+                </div>
               </div>
 
-              <div class="input__holder mr-3">
-                <label>Gender</label>
-                <input
-                  type="email"
-                  id="exampleFormControlInput3"
-                  placeholder="Male"
-                />
+              <div class="col-md-6 col-sm-6 mt-4 mt-md-0">
+                <div class="input__holder 50">
+                  <label>Gender</label>
+                  <select v-model="gender">
+                    <option selected>Male</option>
+                    <option>Female</option>
+                  </select>
+                </div>
               </div>
 
-              <div class="input__holder mr-3">
-                <label>Year Born</label>
-                <input
-                  type="email"
-                  id="exampleFormControlInput3"
-                  placeholder="1993"
-                />
+              <div class="col-md-6 col-sm-6 mt-4">
+                <div class="input__holder 50">
+                  <label>Year Born</label>
+                  <select v-model="yearBorn">
+                    <option selected>unknown</option>
+                    <option v-for="year in years" :key="year">
+                      {{ year }}
+                    </option>
+                  </select>
+                </div>
               </div>
 
-              <div class="input__holder mr-3">
-                <label>Year Killed</label>
-                <input
-                  type="email"
-                  id="exampleFormControlInput3"
-                  placeholder="2020"
-                />
+              <div class="col-md-6 col-sm-6 mt-4">
+                <div class="input__holder 50">
+                  <label>Year Killed</label>
+                  <select v-model="yearKilled">
+                    <option v-for="year in years" :key="year">
+                      {{ year }}
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="mt-2 mb-5">
+        <div class="mt-4 mb-5">
           <div class="input__holder">
             <label>Write his/her story here:</label>
             <textarea
               id="exampleFormControlTextarea1"
               class="form-control mt-1"
+              v-model="story"
               rows="6"
               placeholder="How did this hero die?"
             ></textarea>
           </div>
         </div>
 
+        <p v-show="error" class="text-center text-danger font-weight-bold">
+          {{ errorMessage }}
+        </p>
+
         <div
+          @click="publish"
           class="d-flex flex-row align-items-center mt-4 mb-5 mx-auto publisher"
         >
-          <span class="d-block publish"> Publish </span>
+          <span class="d-block publish">{{ btnText }} </span>
           <span>
             <svg
               width="20"
@@ -99,7 +129,123 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      currentFile: '/placeholder.svg',
+      name: '',
+      state: 'Lagos',
+      gender: 'Male',
+      yearBorn: 'unknown',
+      yearKilled: '2020',
+      story: '',
+      years: [],
+      states: [],
+      processing: false,
+      btnText: 'Publish',
+      error: false,
+      errorMessage: '',
+    }
+  },
+  methods: {
+    createUpdateImage(file) {
+      //   var image = new Image();
+      const reader = new FileReader()
+      const vm = this
+      reader.onload = (e) => {
+        vm.currentFile = e.target.result
+      }
+      reader.readAsDataURL(file)
+    },
+    onFileChange($event) {
+      const files = $event.target.files || $event.dataTransfer.files
+      this.createUpdateImage(files[0])
+      console.log(this.$refs.file.files[0])
+    },
+
+    hasError(field) {
+      return this.errorMessage.includes(field)
+    },
+
+    async publish() {
+      if (this.processing) {
+        return
+      }
+      this.processing = true
+      this.btnText = 'Publishing'
+      this.error = false
+
+      const formData = new FormData()
+      formData.append('name', this.name)
+      formData.append('state', this.state)
+      formData.append('gender', this.gender)
+      formData.append('year_born', this.yearBorn)
+      formData.append('year_killed', this.yearKilled)
+      formData.append('story', this.story)
+      formData.append('image', this.$refs.file.files[0])
+
+      try {
+        const data = await this.$axios.$post('/victims', formData)
+
+        if (data) {
+          this.processing = false
+          this.btnText = 'Publish'
+        }
+      } catch (error) {
+        this.processing = false
+        this.btnText = 'Publish'
+        this.error = true
+        this.errorMessage = error.response.data.error
+
+        console.log(error.response)
+      }
+    },
+  },
+  mounted() {
+    for (let i = 2020; i > 1970; i--) {
+      this.years.push(i)
+    }
+    this.states = [
+      'Lagos',
+      'Abuja',
+      'Abia',
+      'Adamawa',
+      'Akwa Ibom',
+      'Anambra',
+      'Bauchi',
+      'Bayelsa',
+      'Benue',
+      'Borno',
+      'Cross River',
+      'Delta',
+      'Ebonyi',
+      'Edo',
+      'Ekiti',
+      'Enugu',
+      'Gombe',
+      'Imo',
+      'Jigawa',
+      'Kaduna',
+      'Kano',
+      'Katsina',
+      'Kebbi',
+      'Kogi',
+      'Kwara',
+      'Nasarawa',
+      'Niger',
+      'Ogun',
+      'Ondo',
+      'Osun',
+      'Oyo',
+      'Plateau',
+      'Rivers',
+      'Sokoto',
+      'Taraba',
+      'Yobe',
+      'Zamfara',
+    ]
+  },
+}
 </script>
 
 <style scoped>
@@ -115,12 +261,12 @@ export default {}
 }
 .uploader {
   width: 300px;
-  height: 200px;
+  height: 250px;
 }
 
 .image {
   width: 100%;
-  max-height: 300px;
+  max-height: 250px;
   cursor: pointer;
 }
 .input__holder label {
@@ -137,6 +283,22 @@ export default {}
   box-sizing: border-box;
   font-size: 1.4rem;
   border-bottom: 1px solid#C4C4C4;
+}
+
+.input__holder select {
+  font-size: 1.4rem;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  width: 100%;
+  padding: 8px 0;
+  box-sizing: border-box;
+  font-size: 1.4rem;
+  border-bottom: 1px solid#C4C4C4;
+}
+
+.input__holder select:focus {
+  outline: none;
 }
 
 .input__holder textarea {
@@ -169,5 +331,24 @@ export default {}
 
 .publisher:hover {
   border-bottom: 1px solid #fff;
+}
+@media screen and (max-width: 767px) {
+  .input__holder.50 {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 439px) {
+  .uploader {
+    width: 250px;
+    height: 200px;
+  }
+}
+
+@media screen and (max-width: 349px) {
+  .uploader {
+    width: 200px;
+    height: 200px;
+  }
 }
 </style>
