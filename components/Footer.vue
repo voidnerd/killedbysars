@@ -50,6 +50,7 @@
 .footer {
   color: #b5b5b5;
   background: #262d31;
+  font-size: 15px;
   margin-top: 50px;
   padding-top: 30px;
   padding-bottom: 50px;
