@@ -120,7 +120,7 @@ export default {
   height: 250px;
 }
 .story {
-  min-height: 100px;
+  min-height: 60px;
 }
 .card {
   background-color: #262d31;

@@ -190,6 +190,7 @@ export default {
         if (data) {
           this.processing = false
           this.btnText = 'Publish'
+          this.$router.push('/')
         }
       } catch (error) {
         this.processing = false
