@@ -66,8 +66,12 @@
 <script>
 export default {
   async asyncData({ $axios }) {
-    const response = await $axios.$get('/victims')
-    return { victims: response.data, selected: response.data }
+    try {
+      const response = await $axios.$get('/victims')
+      return { victims: response.data, selected: response.data }
+    } catch (error) {
+      console.log(error)
+    }
   },
 
   data() {
