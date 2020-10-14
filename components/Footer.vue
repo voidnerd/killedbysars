@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="logo-container d-flex mx-auto">
+    <!-- <div class="logo-container text-center d-flex mx-auto mt-4">
       <div class="align-self-center mr-3">
         <svg
           width="31"
@@ -16,7 +16,7 @@
         </svg>
       </div>
       <div class="title">Killed By SARS</div>
-    </div>
+    </div> -->
 
     <p class="footer__text mx-auto mt-5">
       “Killed by Sars” is the list of people who have died as a result of police
@@ -79,7 +79,7 @@
 
 @media screen and (max-width: 767px) {
   .logo-container {
-    width: 200px;
+    min-width: 200px;
   }
   .title {
     font-size: 25px;
