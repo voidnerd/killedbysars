@@ -29,7 +29,8 @@
         :key="victim.id"
         class="rounded card pb-3 mt-5"
       >
-        <img :src="victim.imageUrl" alt="" class="image" />
+        <div class="image" :style="{ backgroundImage: `url(${victim.imageUrl})` }">
+        </div>
         <h1 class="text-center mt-3">{{ victim.name }}</h1>
         <div class="text-center">
           <span
@@ -120,8 +121,9 @@ export default {
   font-size: 20px;
 }
 .image {
-  width: 100%;
   height: 250px;
+  background-size: cover;
+  background-position: top center;
 }
 .story {
   min-height: 60px;
