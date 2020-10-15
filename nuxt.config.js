@@ -50,7 +50,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: process.env.BASE_URL || 'https://api.killedbysars.com',
+    baseURL: process.env.BASE_URL || 'https://api.killedbysars.com/api',
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
