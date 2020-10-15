@@ -29,8 +29,10 @@
         :key="victim.id"
         class="rounded card pb-3 mt-5"
       >
-        <div class="image" :style="{ backgroundImage: `url(${victim.imageUrl})` }">
-        </div>
+        <div
+          class="image"
+          :style="{ backgroundImage: `url(${victim.imageUrl})` }"
+        ></div>
         <h1 class="text-center mt-3">{{ victim.name }}</h1>
         <div class="text-center">
           <span
@@ -94,7 +96,7 @@ export default {
     },
     search(str) {
       this.selected = this.victims.filter((val) => {
-        return val.name.includes(str)
+        return val.name.toLowerCase().includes(str.toLowerCase())
       })
     },
   },
