@@ -5,10 +5,31 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: `“Killed by Sars” is the list of people who have died as a result of police brutality in Nigeria. These are people who were killed by the same Police Unit (SARS - Special Anti-Robbery Squad ) constituted to protect them.`,
+      },
+      {
+        name: 'og:description',
+        property: 'og:description',
+        content: `“Killed by Sars” is the list of people who have died as a result of police brutality in Nigeria. These are people who were killed by the same Police Unit (SARS - Special Anti-Robbery Squad ) constituted to protect them.`,
+      },
+      {
+        property: 'og:image',
+        content: '/icons/ms-icon-310x310.png',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'shortcut icon',
+        href: '/icons/android-icon-72x72.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        href: '/icons/apple-icon-152x152.png',
+      },
       {
         rel: 'stylesheet',
         href:
