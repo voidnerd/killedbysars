@@ -19,6 +19,26 @@ export default {
         property: 'og:image',
         content: '/icons/ms-icon-310x310.png',
       },
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      {
+        name: 'twitter:creator',
+        content: '@killedbysars',
+      },
+      {
+        name: 'twitter:title',
+        content: 'Killedbysars',
+      },
+      {
+        name: 'twitter:description',
+        content: `“Killed by Sars” is the list of people who have died as a result of police brutality in Nigeria. These are people who were killed by the same Police Unit (SARS - Special Anti-Robbery Squad ) constituted to protect them.`,
+      },
+      {
+        name: 'twitter:image',
+        content: '/icons/ms-icon-310x310.png',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
